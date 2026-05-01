@@ -274,22 +274,22 @@
   // Auth guard
   const token = localStorage.getItem('admin_token');
   if (!token) {
-    window.location.href = 'index.html';
+    window.location.href = '/admin/index.html';
   } else {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       if (payload.exp * 1000 < Date.now()) {
         localStorage.removeItem('admin_token');
-        window.location.href = 'index.html';
+        window.location.href = '/admin/index.html';
       }
     } catch {
-      window.location.href = 'index.html';
+      window.location.href = '/admin/index.html';
     }
   }
 
   document.getElementById('logout-btn').addEventListener('click', () => {
     localStorage.removeItem('admin_token');
-    window.location.href = 'index.html';
+    window.location.href = '/admin/index.html';
   });
 
   // Toast helper
@@ -505,7 +505,7 @@
 
       if (res.status === 401) {
         localStorage.removeItem('admin_token');
-        window.location.href = 'index.html';
+        window.location.href = '/admin/index.html';
         return;
       }
 
