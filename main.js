@@ -1,21 +1,31 @@
-// ── NAV SCROLL ──────────────────────────────────────────────
+/* ==========================================
+   NAV SCROLL BEHAVIOUR
+   ========================================== */
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 40);
-});
+  navbar.classList.toggle('scrolled', window.scrollY > 30);
+}, { passive: true });
 
-// ── HAMBURGER ────────────────────────────────────────────────
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
-hamburger.addEventListener('click', () => {
-  mobileMenu.classList.toggle('open');
-});
-mobileMenu.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => mobileMenu.classList.remove('open'));
-});
+/* ==========================================
+   MOBILE HAMBURGER
+   ========================================== */
+const hamburger   = document.getElementById('hamburger');
+const overlay     = document.getElementById('mobile-overlay');
+const closeBtn    = document.getElementById('mobile-close');
+const mobileLinks = document.querySelectorAll('.mobile-link');
 
-// ── SCROLL REVEAL ────────────────────────────────────────────
-const revealClasses = ['reveal', 'reveal-left', 'reveal-right', 'reveal-scale', 'stagger'];
+function openMenu()  { overlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+function closeMenu() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+hamburger.addEventListener('click', openMenu);
+closeBtn.addEventListener('click', closeMenu);
+mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+/* ==========================================
+   SCROLL REVEAL
+   ========================================== */
+const revealEls = document.querySelectorAll('.reveal');
+
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -23,64 +33,41 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.12 });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-revealClasses.forEach(cls => {
-  document.querySelectorAll('.' + cls).forEach(el => revealObserver.observe(el));
-});
+revealEls.forEach(el => revealObserver.observe(el));
 
-// ── COUNT-UP ANIMATION ───────────────────────────────────────
-function animateCount(el) {
-  const target = parseInt(el.dataset.target, 10);
-  const suffix = el.dataset.suffix || '+';
-  const duration = 1800;
-  const start = performance.now();
-  const update = (now) => {
-    const elapsed = now - start;
+/* ==========================================
+   COUNT-UP ANIMATION
+   ========================================== */
+function animateCount(el, target, prefix, suffix, duration) {
+  const startTime = performance.now();
+
+  function step(now) {
+    const elapsed  = now - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = Math.floor(eased * target) + suffix;
-    if (progress < 1) requestAnimationFrame(update);
-    else el.textContent = target + suffix;
-  };
-  requestAnimationFrame(update);
+    const eased    = 1 - Math.pow(1 - progress, 3);
+    const current  = Math.floor(eased * target);
+    el.textContent = (prefix || '') + current + (suffix || '');
+    if (progress < 1) requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
 }
 
-const countObserver = new IntersectionObserver((entries) => {
+const statEls = document.querySelectorAll('.stat-num[data-target]');
+
+const statsObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.querySelectorAll('[data-target]').forEach(animateCount);
-      countObserver.unobserve(entry.target);
+      const el     = entry.target;
+      const target = parseInt(el.dataset.target, 10);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      animateCount(el, target, prefix, suffix, 1800);
+      statsObserver.unobserve(el);
     }
   });
-}, { threshold: 0.3 });
+}, { threshold: 0.5 });
 
-document.querySelectorAll('#stats, .hero-card').forEach(el => countObserver.observe(el));
-
-// ── CTA FORM ─────────────────────────────────────────────────
-function handleCTA(e) {
-  e.preventDefault();
-  const email = document.getElementById('cta-email').value;
-  const btn = e.target.querySelector('button');
-  btn.textContent = '✓ Request Sent!';
-  btn.style.background = 'var(--accent)';
-  setTimeout(() => {
-    btn.textContent = 'Book Free Consultation →';
-    btn.style.background = '';
-    document.getElementById('cta-email').value = '';
-  }, 3000);
-}
-
-// ── SMOOTH ACTIVE NAV LINK ───────────────────────────────────
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(a => {
-        a.style.color = a.getAttribute('href') === '#' + entry.target.id ? 'var(--white)' : '';
-      });
-    }
-  });
-}, { rootMargin: '-40% 0px -50% 0px' });
-sections.forEach(s => sectionObserver.observe(s));
+statEls.forEach(el => statsObserver.observe(el));

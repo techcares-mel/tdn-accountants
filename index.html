@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TDN Accountants | Expert Accounting & Tax Services</title>
-  <meta name="description" content="TDN Accountants — trusted accounting, tax planning, bookkeeping and business advisory services. 15+ years of experience, 500+ clients served." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDN Accountants &amp; Advisers | Expert Accounting in Footscray, Melbourne</title>
+  <meta name="description" content="TDN Accountants &amp; Advisers — expert tax, bookkeeping, and business advisory services for Australian businesses. Based in Footscray, Victoria.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -16,130 +16,173 @@
 <nav id="navbar">
   <div class="container">
     <div class="nav-inner">
-      <a href="#" class="logo" id="nav-logo">
-        <img src="assets/logo.png" alt="TDN Accountants & Advisers" class="logo-img">
+      <a href="#" class="nav-logo">
+        <img src="assets/logo.png" alt="TDN Accountants &amp; Advisers" class="logo-img">
       </a>
       <ul class="nav-links" id="nav-links">
         <li><a href="#services">Services</a></li>
-        <li><a href="#features">Why Us</a></li>
+        <li><a href="#features">About</a></li>
         <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#blog">Resources</a></li>
-        <li><a href="#testimonials">Clients</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#cta-banner" class="btn btn-primary">Book Free Consultation</a>
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
+        <a href="#testimonials" class="btn-ghost-nav">Our clients</a>
+        <a href="#contact" class="btn btn-primary">Book a Consultation</a>
       </div>
-    </div>
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="#services">Services</a>
-      <a href="#features">Why Us</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#blog">Resources</a>
-      <a href="#testimonials">Clients</a>
-      <a href="#cta-banner" class="btn btn-primary" style="text-align:center;margin-top:.5rem">Book Free Consultation</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
 
+<!-- MOBILE OVERLAY -->
+<div class="mobile-overlay" id="mobile-overlay">
+  <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+  <div class="mobile-menu">
+    <ul>
+      <li><a href="#services" class="mobile-link">Services</a></li>
+      <li><a href="#features" class="mobile-link">About</a></li>
+      <li><a href="#pricing" class="mobile-link">Pricing</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary btn-lg mobile-link">Book a Consultation</a>
+  </div>
+</div>
+
 <!-- HERO -->
 <section id="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
   <div class="container">
     <div class="hero-inner">
       <div class="hero-text reveal">
-        <div class="hero-badge"><span>✦ Trusted</span> by 500+ businesses across Australia</div>
-        <h1>Your Finances,<br>Handled with <span class="gradient">Precision</span></h1>
-        <p>TDN Accountants delivers expert tax, bookkeeping and business advisory services — so you can focus on growing your business.</p>
-        <div class="hero-btns">
-          <a href="#cta-banner" class="btn btn-primary">Get Started Today</a>
-          <a href="#services" class="btn btn-ghost">Explore Services ↓</a>
+        <div class="badge">★ Trusted by 500+ Australian businesses</div>
+        <h1 class="hero-title">
+          Your Finances,<br>
+          Handled with <span class="gradient-text">Precision.</span>
+        </h1>
+        <p class="hero-sub">Expert accounting, tax strategy, and advisory — built for Australian businesses that want to grow.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary btn-lg">Book a Free Consultation</a>
+          <a href="#services" class="btn btn-ghost btn-lg">See Our Services →</a>
+        </div>
+        <div class="hero-trust">
+          <span>✓ No lock-in contracts</span>
+          <span>✓ Free first consultation</span>
+          <span>✓ 15+ years experience</span>
         </div>
       </div>
-      <div class="hero-visual reveal-right">
-        <div class="float-badge b1">📈 Tax Return Filed ✓</div>
-        <div class="hero-card">
-          <div style="font-family:var(--font-h);font-weight:700;font-size:1.1rem;margin-bottom:1.5rem;">Financial Overview</div>
-          <div style="display:flex;flex-direction:column;gap:.8rem">
-            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--surface2);border-radius:8px;padding:.8rem 1rem;">
-              <span style="font-size:.9rem;color:var(--muted)">💼 Bookkeeping</span>
-              <span style="color:var(--accent);font-weight:600;">Up to date</span>
+      <div class="hero-visual reveal reveal-delay">
+        <div class="hero-mockup">
+          <div class="mockup-card mockup-main">
+            <div class="mockup-header">
+              <span class="mockup-title">Revenue Overview</span>
+              <span class="mockup-badge-sm">↑ 12.4%</span>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--surface2);border-radius:8px;padding:.8rem 1rem;">
-              <span style="font-size:.9rem;color:var(--muted)">📋 Tax Lodgement</span>
-              <span style="color:var(--accent);font-weight:600;">On time</span>
+            <div class="mockup-amount">$284,500</div>
+            <div class="mockup-chart">
+              <div class="bar" style="--h:60%"></div>
+              <div class="bar" style="--h:75%"></div>
+              <div class="bar" style="--h:52%"></div>
+              <div class="bar" style="--h:88%"></div>
+              <div class="bar" style="--h:68%"></div>
+              <div class="bar" style="--h:92%"></div>
+              <div class="bar is-active" style="--h:82%"></div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;background:var(--surface2);border-radius:8px;padding:.8rem 1rem;">
-              <span style="font-size:.9rem;color:var(--muted)">💰 Cash Flow</span>
-              <span style="color:var(--primary);font-weight:600;">+18% YoY</span>
+            <div class="mockup-labels">
+              <span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
             </div>
           </div>
-          <div class="hero-stats">
-            <div class="hero-stat"><div class="num" data-target="500" data-suffix="+">0</div><p>Clients Served</p></div>
-            <div class="hero-stat"><div class="num" data-target="15" data-suffix="+">0</div><p>Years Experience</p></div>
-            <div class="hero-stat"><div class="num" data-target="98" data-suffix="%">0</div><p>Satisfaction</p></div>
-            <div class="hero-stat"><div class="num" data-target="50" data-suffix="M+">0</div><p>Tax Saved</p></div>
+          <div class="mockup-row">
+            <div class="mockup-card mockup-sm">
+              <div class="mockup-label">Tax Saved</div>
+              <div class="mockup-value" style="color:var(--color-accent)">$124,500</div>
+            </div>
+            <div class="mockup-card mockup-sm">
+              <div class="mockup-label">Next BAS Due</div>
+              <div class="mockup-value">28 Oct</div>
+            </div>
+          </div>
+          <div class="mockup-card mockup-activity">
+            <div class="activity-avatar">JS</div>
+            <div class="activity-info">
+              <div class="activity-name">James Sullivan</div>
+              <div class="activity-sub">BAS lodgement complete</div>
+            </div>
+            <div class="activity-check">✓</div>
           </div>
         </div>
-        <div class="float-badge b2">🔒 ATO Compliant</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
+<!-- TRUST STRIP -->
+<section id="trust">
+  <div class="container">
+    <p class="trust-label">Proudly serving businesses across Australia</p>
+    <div class="trust-logos">
+      <span>Retail</span>
+      <span>Construction</span>
+      <span>Healthcare</span>
+      <span>Hospitality</span>
+      <span>Legal</span>
+      <span>Property</span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES BENTO -->
 <section id="features">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Why TDN Accountants</div>
-      <h2>Accounting that works as hard as you do</h2>
-      <p>We combine decades of expertise with modern tools to give your business the financial edge it deserves.</p>
-    </div>
-    <div class="features-grid stagger" id="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(79,142,247,.15)">🔒</div>
-        <h3>Tax Compliance</h3>
-        <p>Stay penalty-free with expert ATO filing, BAS lodgement, and proactive compliance management.</p>
+    <div class="section-label reveal">Why TDN</div>
+    <h2 class="section-title reveal">Accounting that works as <span class="gradient-text">hard as you do</span></h2>
+    <p class="section-sub reveal">We combine deep expertise with modern tools to give you full financial clarity.</p>
+    <div class="bento-grid">
+      <div class="bento-card wide reveal">
+        <div class="bento-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="#C0272D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Tax Compliance &amp; Lodgement</h3>
+        <p>Stay penalty-free. We handle BAS, income tax, and FBT on time, every time — so you never face an ATO surprise.</p>
+        <div class="bento-visual">
+          <div class="mini-stat">
+            <span class="mini-num">100%</span>
+            <span class="mini-label">On-time lodgements</span>
+          </div>
+          <div class="mini-stat">
+            <span class="mini-num" style="color:var(--color-accent)">$0</span>
+            <span class="mini-label">Penalties incurred</span>
+          </div>
+        </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(0,212,170,.15)">📊</div>
-        <h3>Real-Time Reporting</h3>
-        <p>Always know where your money stands with live dashboards, profit & loss, and cashflow reports.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(255,180,0,.15)">💼</div>
+      <div class="bento-card reveal reveal-delay-1">
+        <div class="bento-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" stroke="#00D4AA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
         <h3>Payroll Management</h3>
-        <p>Accurate, on-time payroll every pay run — STP compliant and integrated with your systems.</p>
+        <p>STP compliant, always accurate, always on time. Your team gets paid right — every single time.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(200,100,255,.15)">🤝</div>
-        <h3>Dedicated Advisor</h3>
-        <p>A real person in your corner — your dedicated accountant knows your business inside out.</p>
+      <div class="bento-card reveal reveal-delay-2">
+        <div class="bento-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke="#4F8EF7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Real-Time Reporting</h3>
+        <p>Your numbers, live and clear. Know exactly where your business stands at any moment.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section id="stats">
-  <div class="container">
-    <div class="stats-grid stagger" id="stats-grid">
-      <div class="stat-item">
-        <div class="num count-up" data-target="500" data-suffix="+">0</div>
-        <p>Clients Served</p>
-      </div>
-      <div class="stat-item">
-        <div class="num count-up" data-target="50" data-suffix="M+">0</div>
-        <p>in Tax Savings</p>
-      </div>
-      <div class="stat-item">
-        <div class="num count-up" data-target="15" data-suffix="+">0</div>
-        <p>Years of Experience</p>
-      </div>
-      <div class="stat-item">
-        <div class="num count-up" data-target="98" data-suffix="%">0</div>
-        <p>Client Retention Rate</p>
+      <div class="bento-card wide reveal reveal-delay-1">
+        <div class="bento-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" stroke="#C0272D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Dedicated Business Advisor</h3>
+        <p>A real expert in your corner — not a call centre. Your dedicated advisor understands your business and grows with you.</p>
+        <div class="bento-visual">
+          <div class="advisor-pill">
+            <div class="advisor-av">TK</div>
+            <span>Your advisor, always available</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -148,81 +191,102 @@
 <!-- SERVICES -->
 <section id="services">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Our Services</div>
-      <h2>Everything your business needs</h2>
-      <p>From day-to-day bookkeeping to complex tax strategy — we've got you covered.</p>
+    <div class="section-label reveal">What We Do</div>
+    <h2 class="section-title reveal">Services built for <span class="gradient-text">Australian business</span></h2>
+
+    <div class="service-row reveal">
+      <div class="service-text">
+        <div class="service-tag">01 — Bookkeeping</div>
+        <h3>Bookkeeping &amp; Reconciliation</h3>
+        <p>Never lose track of a transaction. We keep your books clean, current, and compliance-ready — so your numbers are always working for you.</p>
+        <a href="#contact" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-visual">
+        <div class="vis-card">
+          <div class="vis-row"><span class="vis-label">Sales Revenue</span><span class="vis-val green">+$48,200</span></div>
+          <div class="vis-row"><span class="vis-label">Operating Costs</span><span class="vis-val red">−$12,400</span></div>
+          <div class="vis-row"><span class="vis-label">Net Profit</span><span class="vis-val">$35,800</span></div>
+          <div class="vis-divider"></div>
+          <div class="vis-row"><span class="vis-label">Reconciled</span><span class="vis-badge">✓ Up to date</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="service-row">
-      <div class="service-content reveal-left">
-        <div class="tag">📚 Bookkeeping</div>
-        <h2>Bookkeeping & Reconciliation</h2>
-        <p>Keep your books clean, current, and audit-ready with our meticulous bookkeeping service — integrated with Xero, MYOB, and QuickBooks.</p>
-        <ul class="service-list">
-          <li>Monthly bank reconciliation</li>
-          <li>Accounts payable & receivable</li>
-          <li>Xero / MYOB certified advisors</li>
-          <li>BAS preparation & lodgement</li>
-        </ul>
+    <div class="service-row reverse reveal">
+      <div class="service-text">
+        <div class="service-tag">02 — Tax</div>
+        <h3>Tax Planning &amp; Lodgement</h3>
+        <p>Maximise your return, minimise your risk. From income tax to GST and FBT — we plan ahead so you pay only what you owe.</p>
+        <a href="#contact" class="service-link">Learn more →</a>
       </div>
-      <div class="service-visual reveal-right">
-        <div style="text-align:center">
-          <div style="font-size:4rem;margin-bottom:1rem">📚</div>
-          <div style="font-family:var(--font-h);font-size:1.2rem;font-weight:700;margin-bottom:.5rem">Clean Books. Clear Mind.</div>
-          <div style="color:var(--muted);font-size:.9rem">Real-time ledger accuracy</div>
-          <div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap">
-            <div style="background:var(--surface2);border-radius:8px;padding:.6rem 1rem;font-size:.85rem">Xero ✓</div>
-            <div style="background:var(--surface2);border-radius:8px;padding:.6rem 1rem;font-size:.85rem">MYOB ✓</div>
-            <div style="background:var(--surface2);border-radius:8px;padding:.6rem 1rem;font-size:.85rem">QuickBooks ✓</div>
+      <div class="service-visual">
+        <div class="vis-card">
+          <div class="vis-row"><span class="vis-label">Taxable Income</span><span class="vis-val">$180,000</span></div>
+          <div class="vis-row"><span class="vis-label">Deductions Found</span><span class="vis-val green">−$42,600</span></div>
+          <div class="vis-row"><span class="vis-label">Tax Liability</span><span class="vis-val">$42,867</span></div>
+          <div class="vis-divider"></div>
+          <div class="vis-row"><span class="vis-label">You saved</span><span class="vis-badge" style="color:var(--color-accent);background:rgba(0,212,170,.08)">$14,220 vs last year</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-row reveal">
+      <div class="service-text">
+        <div class="service-tag">03 — Advisory</div>
+        <h3>Business Advisory</h3>
+        <p>Strategy that moves the needle. We go beyond compliance — helping you plan, grow, and make smarter financial decisions at every stage.</p>
+        <a href="#contact" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-visual">
+        <div class="vis-card">
+          <div class="vis-label" style="font-size:.78rem;color:var(--color-muted);margin-bottom:1rem">Growth Forecast</div>
+          <div class="vis-bars">
+            <div class="vis-bar-wrap"><div class="vis-bar-fill" style="height:50%"></div><span>Q1</span></div>
+            <div class="vis-bar-wrap"><div class="vis-bar-fill" style="height:65%"></div><span>Q2</span></div>
+            <div class="vis-bar-wrap"><div class="vis-bar-fill" style="height:75%"></div><span>Q3</span></div>
+            <div class="vis-bar-wrap"><div class="vis-bar-fill accent" style="height:92%"></div><span>Q4</span></div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="service-row reverse">
-      <div class="service-content reveal-right">
-        <div class="tag">🧾 Tax</div>
-        <h2>Tax Planning & Lodgement</h2>
-        <p>Minimise your tax liability legally and strategically. We plan ahead so you're never caught off guard at tax time.</p>
-        <ul class="service-list">
-          <li>Individual & company tax returns</li>
-          <li>Proactive tax minimisation strategies</li>
-          <li>Capital gains tax advice</li>
-          <li>ATO audit representation</li>
-        </ul>
+    <div class="service-row reverse reveal">
+      <div class="service-text">
+        <div class="service-tag">04 — Superannuation</div>
+        <h3>SMSF &amp; Superannuation</h3>
+        <p>Your retirement, managed with care. We handle self-managed super fund compliance, strategy, and reporting — keeping your future on track.</p>
+        <a href="#contact" class="service-link">Learn more →</a>
       </div>
-      <div class="service-visual reveal-left">
-        <div style="text-align:center">
-          <div style="font-size:4rem;margin-bottom:1rem">🧾</div>
-          <div style="font-family:var(--font-h);font-size:1.2rem;font-weight:700;margin-bottom:.5rem">Lodge on Time. Save More.</div>
-          <div style="color:var(--muted);font-size:.9rem">ATO-compliant, every time</div>
-          <div style="margin-top:1.5rem;background:var(--surface2);border-radius:var(--radius);padding:1rem">
-            <div style="font-size:.85rem;color:var(--muted);margin-bottom:.4rem">Average tax saved per client</div>
-            <div style="font-family:var(--font-h);font-size:2rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$12,400</div>
-          </div>
+      <div class="service-visual">
+        <div class="vis-card">
+          <div class="vis-row"><span class="vis-label">SMSF Balance</span><span class="vis-val">$842,000</span></div>
+          <div class="vis-row"><span class="vis-label">YTD Return</span><span class="vis-val green">+8.4%</span></div>
+          <div class="vis-row"><span class="vis-label">Compliance Status</span><span class="vis-badge">✓ ATO Compliant</span></div>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="service-row">
-      <div class="service-content reveal-left">
-        <div class="tag">📈 Advisory</div>
-        <h2>Business Advisory Services</h2>
-        <p>Beyond the numbers — we help you grow. Strategic advice on structure, cash flow, investment, and business performance.</p>
-        <ul class="service-list">
-          <li>Business structure optimisation</li>
-          <li>Cash flow forecasting</li>
-          <li>Growth & profitability analysis</li>
-          <li>Budget planning & KPI tracking</li>
-        </ul>
+<!-- STATS -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num" data-target="500" data-suffix="+">0+</div>
+        <div class="stat-label">Clients Served</div>
       </div>
-      <div class="service-visual reveal-right">
-        <div style="text-align:center">
-          <div style="font-size:4rem;margin-bottom:1rem">📈</div>
-          <div style="font-family:var(--font-h);font-size:1.2rem;font-weight:700;margin-bottom:.5rem">Data-Driven Decisions</div>
-          <div style="color:var(--muted);font-size:.9rem">Turn numbers into strategy</div>
-        </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-num accent" data-target="50" data-prefix="$" data-suffix="M+">$0M+</div>
+        <div class="stat-label">Taxes Saved</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-num" data-target="15" data-suffix="+">0+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-num accent" data-target="98" data-suffix="%">0%</div>
+        <div class="stat-label">Client Retention</div>
       </div>
     </div>
   </div>
@@ -231,42 +295,39 @@
 <!-- TESTIMONIALS -->
 <section id="testimonials">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Client Stories</div>
-      <h2>What our clients say</h2>
-      <p>Real results from real businesses across Australia.</p>
-    </div>
-    <div class="testimonials-grid stagger" id="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"TDN Accountants saved us over $30,000 in tax last year through smart planning. They don't just file returns — they actively look for opportunities to save you money."</blockquote>
-        <div class="testimonial-author">
-          <div class="author-avatar">JL</div>
+    <div class="section-label reveal">Client Stories</div>
+    <h2 class="section-title reveal">Trusted by businesses <span class="gradient-text">across Victoria</span></h2>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"TDN completely transformed how we handle our finances. We went from dreading tax time to feeling totally on top of it. Our advisor knows our business inside out."</p>
+        <div class="testi-author">
+          <div class="testi-av">MR</div>
           <div>
-            <div class="author-name">James Liu</div>
-            <div class="author-role">Director, Liu Construction Pty Ltd</div>
+            <div class="testi-name">Michael R.</div>
+            <div class="testi-biz">Retail — Melbourne</div>
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Switching to TDN was the best business decision we made. Our books are always clean, BAS is always on time, and we finally understand our financials."</blockquote>
-        <div class="testimonial-author">
-          <div class="author-avatar">SR</div>
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Switched to TDN two years ago and haven't looked back. They saved us over $30K in the first year alone through smarter tax planning. Absolute professionals."</p>
+        <div class="testi-author">
+          <div class="testi-av">SC</div>
           <div>
-            <div class="author-name">Sarah Reynolds</div>
-            <div class="author-role">Owner, Reynolds Retail Group</div>
+            <div class="testi-name">Sarah C.</div>
+            <div class="testi-biz">Construction — Footscray</div>
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Professional, responsive, and genuinely invested in our success. TDN helped us navigate a complex restructure and come out ahead. Couldn't recommend more."</blockquote>
-        <div class="testimonial-author">
-          <div class="author-avatar">MP</div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"The real-time reporting alone is worth it. I can see exactly where my money is at any time. TDN made accounting actually useful for running my business."</p>
+        <div class="testi-author">
+          <div class="testi-av">DL</div>
           <div>
-            <div class="author-name">Michael Park</div>
-            <div class="author-role">CEO, Parkside Tech Solutions</div>
+            <div class="testi-name">David L.</div>
+            <div class="testi-biz">Hospitality — Williamstown</div>
           </div>
         </div>
       </div>
@@ -277,122 +338,77 @@
 <!-- PRICING -->
 <section id="pricing">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Transparent Pricing</div>
-      <h2>Simple, honest pricing</h2>
-      <p>No hidden fees. No surprises. Just clear value at every level.</p>
-    </div>
-    <div class="pricing-grid stagger" id="pricing-grid">
-      <div class="pricing-card">
-        <div class="price-tier">Starter</div>
-        <div class="price">$299 <span>/ month</span></div>
-        <div class="price-desc">Perfect for sole traders and freelancers.</div>
-        <ul class="price-features">
-          <li>Annual tax return (individual)</li>
-          <li>Quarterly BAS lodgement</li>
-          <li>Monthly bookkeeping (up to 50 transactions)</li>
-          <li>Email support</li>
-          <li class="no">Payroll management</li>
-          <li class="no">Business advisory</li>
+    <div class="section-label reveal">Simple Pricing</div>
+    <h2 class="section-title reveal">Transparent, <span class="gradient-text">no-surprises</span> pricing</h2>
+    <p class="section-sub reveal">All plans include a dedicated advisor, ATO compliance, and real-time access to your financials.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-price">$299<span>/mo</span></div>
+        <p class="pricing-desc">Perfect for sole traders and small businesses getting started.</p>
+        <ul class="pricing-features">
+          <li>✓ Monthly bookkeeping</li>
+          <li>✓ BAS lodgement</li>
+          <li>✓ Annual tax return</li>
+          <li>✓ Email support</li>
+          <li class="dim">✗ Payroll management</li>
+          <li class="dim">✗ Business advisory</li>
         </ul>
-        <a href="#cta-banner" class="btn btn-ghost" style="width:100%;justify-content:center">Get Started</a>
+        <a href="#contact" class="btn btn-outline w-full">Get Started</a>
       </div>
-      <div class="pricing-card popular">
-        <div class="popular-badge">✦ Most Popular</div>
-        <div class="price-tier">Growth</div>
-        <div class="price">$599 <span>/ month</span></div>
-        <div class="price-desc">Ideal for small to medium businesses.</div>
-        <ul class="price-features">
-          <li>Company & trust tax returns</li>
-          <li>Monthly BAS & IAS lodgement</li>
-          <li>Full bookkeeping & reconciliation</li>
-          <li>Payroll (up to 10 employees)</li>
-          <li>Quarterly advisory meeting</li>
-          <li>Priority phone & email support</li>
+      <div class="pricing-card featured reveal reveal-delay-1">
+        <div class="pricing-popular">Most Popular</div>
+        <div class="pricing-tier">Growth</div>
+        <div class="pricing-price">$599<span>/mo</span></div>
+        <p class="pricing-desc">For growing businesses that need full financial support.</p>
+        <ul class="pricing-features">
+          <li>✓ Weekly bookkeeping</li>
+          <li>✓ BAS &amp; IAS lodgement</li>
+          <li>✓ Tax planning &amp; return</li>
+          <li>✓ Payroll (up to 10 staff)</li>
+          <li>✓ Quarterly advisory</li>
+          <li>✓ Priority support</li>
         </ul>
-        <a href="#cta-banner" class="btn btn-primary" style="width:100%;justify-content:center">Get Started</a>
+        <a href="#contact" class="btn btn-primary w-full">Get Started</a>
       </div>
-      <div class="pricing-card">
-        <div class="price-tier">Enterprise</div>
-        <div class="price">Custom</div>
-        <div class="price-desc">Tailored for large businesses with complex needs.</div>
-        <ul class="price-features">
-          <li>All Growth features</li>
-          <li>Unlimited payroll</li>
-          <li>Monthly advisory &amp; CFO support</li>
-          <li>SMSF &amp; superannuation</li>
-          <li>ATO audit representation</li>
-          <li>Dedicated account manager</li>
+      <div class="pricing-card reveal reveal-delay-2">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-price">Custom</div>
+        <p class="pricing-desc">Tailored solutions for larger businesses and complex structures.</p>
+        <ul class="pricing-features">
+          <li>✓ Everything in Growth</li>
+          <li>✓ SMSF management</li>
+          <li>✓ Unlimited payroll</li>
+          <li>✓ Monthly advisory</li>
+          <li>✓ CFO-level reporting</li>
+          <li>✓ Dedicated account team</li>
         </ul>
-        <a href="#cta-banner" class="btn btn-ghost" style="width:100%;justify-content:center">Contact Us</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BLOG -->
-<section id="blog">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Resources</div>
-      <h2>Stay informed, stay ahead</h2>
-      <p>Expert insights on tax, finance and business strategy from the TDN team.</p>
-    </div>
-    <div class="blog-grid stagger" id="blog-grid">
-      <div class="blog-card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#1a2236,#0d1829)">💰</div>
-        <div class="blog-body">
-          <div class="blog-tag">Tax Planning</div>
-          <h3>Top 10 Tax Deductions Small Business Owners Miss in 2025</h3>
-          <p>Discover the most commonly overlooked deductions that could put thousands back in your pocket this financial year.</p>
-          <div class="blog-meta"><span>📅 Apr 2025</span><span>⏱ 5 min read</span></div>
-        </div>
-      </div>
-      <div class="blog-card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#1a2236,#0d1829)">📊</div>
-        <div class="blog-body">
-          <div class="blog-tag">Cash Flow</div>
-          <h3>How to Build a 90-Day Cash Flow Forecast for Your Business</h3>
-          <p>A step-by-step guide to forecasting cash flow so you're never caught short on funds when it matters most.</p>
-          <div class="blog-meta"><span>📅 Mar 2025</span><span>⏱ 7 min read</span></div>
-        </div>
-      </div>
-      <div class="blog-card">
-        <div class="blog-thumb" style="background:linear-gradient(135deg,#1a2236,#0d1829)">🏦</div>
-        <div class="blog-body">
-          <div class="blog-tag">Superannuation</div>
-          <h3>SMSF in 2025: Is a Self-Managed Super Fund Right for You?</h3>
-          <p>Weighing the benefits and obligations of running an SMSF — with expert guidance from our certified advisors.</p>
-          <div class="blog-meta"><span>📅 Feb 2025</span><span>⏱ 6 min read</span></div>
-        </div>
+        <a href="#contact" class="btn btn-outline w-full">Contact Us</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA BANNER -->
-<section id="cta-banner">
+<section id="cta">
+  <div class="cta-glow"></div>
   <div class="container">
-    <div class="cta-box reveal-scale">
-      <div class="section-label">Get Started Today</div>
-      <h2>Be financially <span style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">unstoppable.</span></h2>
-      <p>Book your free 30-minute consultation with a TDN accountant. No obligations, no jargon — just clear advice.</p>
-      <form class="cta-form" id="cta-form" onsubmit="handleCTA(event)">
-        <input type="email" id="cta-email" placeholder="Enter your email address" required />
-        <button type="submit" class="btn btn-primary">Book Free Consultation →</button>
-      </form>
-      <p style="color:var(--muted);font-size:.8rem;margin-top:1rem">✓ No spam. ✓ No credit card required. ✓ Response within 24 hours.</p>
+    <div class="cta-inner reveal">
+      <h2 class="cta-title">Be financially <span class="gradient-text-light">unstoppable.</span></h2>
+      <p class="cta-sub">Join 500+ Australian businesses who trust TDN Accountants &amp; Advisers to handle their numbers.</p>
+      <a href="#contact" class="btn btn-white btn-lg">Book a Free Consultation</a>
+      <p class="cta-note">No lock-in. Free first consultation. Response within 24 hours.</p>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer id="contact">
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#" class="logo" style="margin-bottom:.5rem">
-          <img src="assets/logo.png" alt="TDN Accountants & Advisers" class="logo-img">
+        <a href="#">
+          <img src="assets/logo.png" alt="TDN Accountants &amp; Advisers" class="logo-img footer-logo-img">
         </a>
         <p>Trusted accounting, tax and advisory services for Australian businesses since 2009.</p>
         <address class="footer-address">
@@ -400,10 +416,15 @@
           Footscray, Victoria 3011, AU
         </address>
         <div class="footer-social">
-          <a href="#" class="social-link" aria-label="LinkedIn">in</a>
-          <a href="#" class="social-link" aria-label="Facebook">f</a>
-          <a href="#" class="social-link" aria-label="Instagram">ig</a>
-          <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
         </div>
       </div>
       <div class="footer-col">
@@ -411,19 +432,18 @@
         <ul>
           <li><a href="#services">Bookkeeping</a></li>
           <li><a href="#services">Tax Planning</a></li>
-          <li><a href="#services">Payroll</a></li>
           <li><a href="#services">Business Advisory</a></li>
-          <li><a href="#services">SMSF</a></li>
+          <li><a href="#services">SMSF &amp; Super</a></li>
+          <li><a href="#services">Payroll</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="#">About TDN</a></li>
-          <li><a href="#">Our Team</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#testimonials">Client Stories</a></li>
-          <li><a href="#cta-banner">Contact</a></li>
+          <li><a href="#features">About TDN</a></li>
+          <li><a href="#testimonials">Our Clients</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -432,13 +452,12 @@
           <li><a href="#">Privacy Policy</a></li>
           <li><a href="#">Terms of Service</a></li>
           <li><a href="#">Disclaimer</a></li>
-          <li><a href="#">Accessibility</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 TDN Accountants Pty Ltd. All rights reserved. ABN: 00 000 000 000</p>
-      <p>CPA Australia | Tax Practitioners Board Registered</p>
+      <p>© 2026 TDN Accountants &amp; Advisers. All rights reserved.</p>
+      <p>ABN: XX XXX XXX XXX · ASIC Registered</p>
     </div>
   </div>
 </footer>
