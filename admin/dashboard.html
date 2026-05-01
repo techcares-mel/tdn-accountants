@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDN Admin — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #F4F6F9; color: #374151; min-height: 100vh; }
+
+    /* Top bar */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid #E2E8F0;
+      padding: .85rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .topbar-left { display: flex; align-items: center; gap: 1rem; }
+    .topbar-left img { height: 36px; width: auto; }
+    .topbar-title { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800; color: #111827; }
+    .topbar-right { display: flex; align-items: center; gap: 1rem; }
+    .btn-preview {
+      font-size: .82rem; font-weight: 600; color: #6B7280;
+      border: 1px solid #E2E8F0; border-radius: 8px;
+      padding: .45rem .9rem; background: none; cursor: pointer; transition: all .2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-preview:hover { border-color: #C0272D; color: #C0272D; }
+    .btn-logout {
+      font-size: .82rem; font-weight: 600; color: #9CA3AF; background: none;
+      border: none; cursor: pointer; transition: color .2s;
+    }
+    .btn-logout:hover { color: #C0272D; }
+    .btn-save {
+      background: linear-gradient(135deg, #C0272D, #E8373E);
+      color: #fff; border: none; border-radius: 8px;
+      padding: .55rem 1.4rem; font-family: 'Inter', sans-serif;
+      font-size: .88rem; font-weight: 600; cursor: pointer;
+      transition: opacity .2s, transform .2s;
+    }
+    .btn-save:hover { opacity: .9; transform: scale(1.02); }
+    .btn-save:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      padding: .75rem 1.25rem; border-radius: 10px;
+      font-size: .85rem; font-weight: 600;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s; z-index: 999;
+    }
+    .toast.success { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
+    .toast.error   { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+    .toast.show    { opacity: 1; pointer-events: auto; }
+
+    /* Main layout */
+    .main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+    /* Section cards */
+    .section-card {
+      background: #fff; border: 1px solid #E2E8F0;
+      border-radius: 14px; margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    .section-head {
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #F3F4F6;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .section-head h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: .95rem; font-weight: 800; color: #111827;
+    }
+    .section-badge {
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .06em; color: #C0272D;
+      background: rgba(192,39,45,.08); border-radius: 99px;
+      padding: .18rem .55rem;
+    }
+    .section-body { padding: 1.5rem; }
+
+    /* Form fields */
+    .field { margin-bottom: 1.1rem; }
+    .field:last-child { margin-bottom: 0; }
+    label {
+      display: block; font-size: .78rem; font-weight: 600;
+      color: #6B7280; text-transform: uppercase; letter-spacing: .05em;
+      margin-bottom: .35rem;
+    }
+    input[type="text"], input[type="number"], textarea {
+      width: 100%; padding: .6rem .9rem;
+      border: 1px solid #E2E8F0; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: .88rem;
+      color: #111827; background: #FAFAFA; outline: none;
+      transition: border-color .2s, background .2s;
+    }
+    input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+      border-color: #C0272D; background: #fff;
+    }
+    textarea { resize: vertical; min-height: 72px; line-height: 1.6; }
+
+    .field-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .75rem; }
+    .field-row .field { margin-bottom: 0; }
+
+    /* Repeater groups (stats, testimonials, pricing) */
+    .repeat-group {
+      border: 1px solid #EEF1F7;
+      border-radius: 10px;
+      padding: 1.1rem;
+      margin-bottom: .85rem;
+      background: #FAFBFD;
+    }
+    .repeat-group:last-child { margin-bottom: 0; }
+    .repeat-label {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: #9CA3AF; margin-bottom: .85rem;
+    }
+
+    /* Pricing featured toggle */
+    .featured-row { display: flex; align-items: center; gap: .6rem; margin-top: .75rem; }
+    .featured-row input[type="checkbox"] { width: 16px; height: 16px; accent-color: #C0272D; }
+    .featured-row label {
+      font-size: .82rem; font-weight: 500; color: #374151;
+      text-transform: none; letter-spacing: 0; margin: 0;
+    }
+
+    /* Hint text */
+    .hint { font-size: .73rem; color: #9CA3AF; margin-top: .3rem; }
+
+    @media (max-width: 600px) {
+      .topbar { padding: .75rem 1rem; }
+      .topbar-title { display: none; }
+      .main { padding: 1.5rem 1rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <img src="../assets/logo.png" alt="TDN">
+    <span class="topbar-title">Content Editor</span>
+  </div>
+  <div class="topbar-right">
+    <a href="/" target="_blank" class="btn-preview">View Site ↗</a>
+    <button class="btn-save" id="save-btn">Save Changes</button>
+    <button class="btn-logout" id="logout-btn">Log out</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- HERO -->
+  <div class="section-card">
+    <div class="section-head">
+      <h2>Hero Section</h2>
+      <span class="section-badge">Top of page</span>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label>Badge text</label>
+        <input type="text" id="hero-badge" placeholder="★ Trusted by 500+ Australian businesses">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Headline — Line 1</label>
+          <input type="text" id="hero-h1-line1" placeholder="Your Finances,">
+        </div>
+        <div class="field">
+          <label>Headline — Line 2</label>
+          <input type="text" id="hero-h1-line2" placeholder="Handled with">
+        </div>
+        <div class="field">
+          <label>Gradient word</label>
+          <input type="text" id="hero-h1-gradient" placeholder="Precision.">
+        </div>
+      </div>
+      <div class="field">
+        <label>Subheading</label>
+        <textarea id="hero-subheading" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Trust points (3 items)</label>
+        <div class="field-row">
+          <div class="field"><input type="text" id="trust-0" placeholder="No lock-in contracts"></div>
+          <div class="field"><input type="text" id="trust-1" placeholder="Free first consultation"></div>
+          <div class="field"><input type="text" id="trust-2" placeholder="15+ years experience"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="section-card">
+    <div class="section-head">
+      <h2>Stats Strip</h2>
+      <span class="section-badge">Numbers section</span>
+    </div>
+    <div class="section-body">
+      <div id="stats-fields"></div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="section-card">
+    <div class="section-head">
+      <h2>Testimonials</h2>
+      <span class="section-badge">Client stories</span>
+    </div>
+    <div class="section-body">
+      <div id="testimonials-fields"></div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="section-card">
+    <div class="section-head">
+      <h2>Pricing</h2>
+      <span class="section-badge">3 tiers</span>
+    </div>
+    <div class="section-body">
+      <div id="pricing-fields"></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section-card">
+    <div class="section-head">
+      <h2>CTA Banner</h2>
+      <span class="section-badge">Call to action</span>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label>Heading</label>
+        <input type="text" id="cta-heading" placeholder="Be financially unstoppable.">
+      </div>
+      <div class="field">
+        <label>Subtext</label>
+        <textarea id="cta-subtext" rows="2"></textarea>
+      </div>
+      <div class="field">
+        <label>Button label</label>
+        <input type="text" id="cta-button" placeholder="Book a Free Consultation">
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="section-card">
+    <div class="section-head">
+      <h2>Footer</h2>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <label>Tagline</label>
+        <input type="text" id="footer-tagline">
+      </div>
+      <div class="field">
+        <label>Address</label>
+        <textarea id="footer-address" rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // Auth guard
+  const token = localStorage.getItem('admin_token');
+  if (!token) {
+    window.location.href = 'index.html';
+  } else {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      if (payload.exp * 1000 < Date.now()) {
+        localStorage.removeItem('admin_token');
+        window.location.href = 'index.html';
+      }
+    } catch {
+      window.location.href = 'index.html';
+    }
+  }
+
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    localStorage.removeItem('admin_token');
+    window.location.href = 'index.html';
+  });
+
+  // Toast helper
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${type} show`;
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  // Build stats fields
+  function buildStatsFields(stats) {
+    const container = document.getElementById('stats-fields');
+    container.innerHTML = stats.map((s, i) => `
+      <div class="repeat-group">
+        <div class="repeat-label">Stat ${i + 1}</div>
+        <div class="field-row">
+          <div class="field">
+            <label>Number</label>
+            <input type="number" id="stat-target-${i}" value="${s.target}">
+          </div>
+          <div class="field">
+            <label>Prefix (e.g. $)</label>
+            <input type="text" id="stat-prefix-${i}" value="${s.prefix}">
+          </div>
+          <div class="field">
+            <label>Suffix (e.g. +)</label>
+            <input type="text" id="stat-suffix-${i}" value="${s.suffix}">
+          </div>
+          <div class="field">
+            <label>Label</label>
+            <input type="text" id="stat-label-${i}" value="${s.label}">
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Build testimonial fields
+  function buildTestimonialFields(testimonials) {
+    const container = document.getElementById('testimonials-fields');
+    container.innerHTML = testimonials.map((t, i) => `
+      <div class="repeat-group">
+        <div class="repeat-label">Testimonial ${i + 1}</div>
+        <div class="field">
+          <label>Quote</label>
+          <textarea id="testi-quote-${i}" rows="3">${t.quote}</textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Client name</label>
+            <input type="text" id="testi-name-${i}" value="${t.name}">
+          </div>
+          <div class="field">
+            <label>Business / location</label>
+            <input type="text" id="testi-biz-${i}" value="${t.business}">
+          </div>
+          <div class="field">
+            <label>Initials (avatar)</label>
+            <input type="text" id="testi-initials-${i}" value="${t.initials}" maxlength="3" style="max-width:80px">
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Build pricing fields
+  function buildPricingFields(pricing) {
+    const container = document.getElementById('pricing-fields');
+    container.innerHTML = pricing.map((p, i) => `
+      <div class="repeat-group">
+        <div class="repeat-label">Tier ${i + 1}</div>
+        <div class="field-row">
+          <div class="field">
+            <label>Tier name</label>
+            <input type="text" id="pricing-tier-${i}" value="${p.tier}">
+          </div>
+          <div class="field">
+            <label>Price</label>
+            <input type="text" id="pricing-price-${i}" value="${p.price}">
+          </div>
+          <div class="field">
+            <label>Suffix (e.g. /mo)</label>
+            <input type="text" id="pricing-suffix-${i}" value="${p.suffix}">
+          </div>
+        </div>
+        <div class="field">
+          <label>Description</label>
+          <input type="text" id="pricing-desc-${i}" value="${p.desc}">
+        </div>
+        <div class="field">
+          <label>Included features (one per line)</label>
+          <textarea id="pricing-features-${i}" rows="4">${p.features.join('\n')}</textarea>
+        </div>
+        <div class="field">
+          <label>Excluded features (one per line, shown greyed out)</label>
+          <textarea id="pricing-excluded-${i}" rows="2">${(p.excluded || []).join('\n')}</textarea>
+        </div>
+        <div class="featured-row">
+          <input type="checkbox" id="pricing-featured-${i}" ${p.featured ? 'checked' : ''}>
+          <label for="pricing-featured-${i}">Mark as "Most Popular"</label>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Populate all fields from content object
+  function populate(c) {
+    // Hero
+    document.getElementById('hero-badge').value       = c.hero.badge;
+    document.getElementById('hero-h1-line1').value    = c.hero.h1_line1;
+    document.getElementById('hero-h1-line2').value    = c.hero.h1_line2;
+    document.getElementById('hero-h1-gradient').value = c.hero.h1_gradient;
+    document.getElementById('hero-subheading').value  = c.hero.subheading;
+    (c.hero.trust || []).forEach((v, i) => {
+      const el = document.getElementById(`trust-${i}`);
+      if (el) el.value = v;
+    });
+
+    // Stats
+    buildStatsFields(c.stats);
+
+    // Testimonials
+    buildTestimonialFields(c.testimonials);
+
+    // Pricing
+    buildPricingFields(c.pricing);
+
+    // CTA
+    document.getElementById('cta-heading').value  = c.cta.heading;
+    document.getElementById('cta-subtext').value  = c.cta.subtext;
+    document.getElementById('cta-button').value   = c.cta.button;
+
+    // Footer
+    document.getElementById('footer-tagline').value = c.footer.tagline;
+    document.getElementById('footer-address').value = c.footer.address;
+  }
+
+  // Collect all fields into a content object
+  function collect(statCount, testiCount, pricingCount) {
+    return {
+      hero: {
+        badge:      document.getElementById('hero-badge').value,
+        h1_line1:   document.getElementById('hero-h1-line1').value,
+        h1_line2:   document.getElementById('hero-h1-line2').value,
+        h1_gradient: document.getElementById('hero-h1-gradient').value,
+        subheading: document.getElementById('hero-subheading').value,
+        trust: [0,1,2].map(i => document.getElementById(`trust-${i}`).value).filter(Boolean)
+      },
+      stats: Array.from({ length: statCount }, (_, i) => ({
+        target: parseInt(document.getElementById(`stat-target-${i}`).value, 10) || 0,
+        prefix: document.getElementById(`stat-prefix-${i}`).value,
+        suffix: document.getElementById(`stat-suffix-${i}`).value,
+        label:  document.getElementById(`stat-label-${i}`).value
+      })),
+      testimonials: Array.from({ length: testiCount }, (_, i) => ({
+        quote:    document.getElementById(`testi-quote-${i}`).value,
+        name:     document.getElementById(`testi-name-${i}`).value,
+        business: document.getElementById(`testi-biz-${i}`).value,
+        initials: document.getElementById(`testi-initials-${i}`).value
+      })),
+      pricing: Array.from({ length: pricingCount }, (_, i) => ({
+        tier:     document.getElementById(`pricing-tier-${i}`).value,
+        price:    document.getElementById(`pricing-price-${i}`).value,
+        suffix:   document.getElementById(`pricing-suffix-${i}`).value,
+        desc:     document.getElementById(`pricing-desc-${i}`).value,
+        features: document.getElementById(`pricing-features-${i}`).value.split('\n').map(s => s.trim()).filter(Boolean),
+        excluded: document.getElementById(`pricing-excluded-${i}`).value.split('\n').map(s => s.trim()).filter(Boolean),
+        featured: document.getElementById(`pricing-featured-${i}`).checked
+      })),
+      cta: {
+        heading: document.getElementById('cta-heading').value,
+        subtext: document.getElementById('cta-subtext').value,
+        button:  document.getElementById('cta-button').value
+      },
+      footer: {
+        tagline: document.getElementById('footer-tagline').value,
+        address: document.getElementById('footer-address').value
+      }
+    };
+  }
+
+  // Load current content
+  let statCount = 4, testiCount = 3, pricingCount = 3;
+
+  fetch('/api/content')
+    .then(r => r.json())
+    .then(c => {
+      statCount    = c.stats.length;
+      testiCount   = c.testimonials.length;
+      pricingCount = c.pricing.length;
+      populate(c);
+    })
+    .catch(() => showToast('Could not load content from server.', 'error'));
+
+  // Save handler
+  document.getElementById('save-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('save-btn');
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+
+    const content = collect(statCount, testiCount, pricingCount);
+
+    try {
+      const res = await fetch('/api/content', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('admin_token')}`
+        },
+        body: JSON.stringify(content)
+      });
+
+      if (res.status === 401) {
+        localStorage.removeItem('admin_token');
+        window.location.href = 'index.html';
+        return;
+      }
+
+      if (!res.ok) {
+        const d = await res.json();
+        showToast(d.error || 'Save failed.', 'error');
+      } else {
+        showToast('Changes saved successfully!', 'success');
+      }
+    } catch {
+      showToast('Network error. Changes not saved.', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Save Changes';
+    }
+  });
+</script>
+</body>
+</html>
