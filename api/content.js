@@ -1,5 +1,22 @@
-const { kv } = require('@vercel/kv');
+const { put, list } = require('@vercel/blob');
 const jwt = require('jsonwebtoken');
+
+const BLOB_PATHNAME = 'content.json';
+
+async function readContent() {
+  const { blobs } = await list({ prefix: BLOB_PATHNAME });
+  if (!blobs.length) return null;
+  const r = await fetch(blobs[0].url);
+  return r.json();
+}
+
+async function writeContent(content) {
+  await put(BLOB_PATHNAME, JSON.stringify(content), {
+    access: 'public',
+    addRandomSuffix: false,
+    contentType: 'application/json',
+  });
+}
 
 const DEFAULT_CONTENT = {
   hero: {
@@ -85,7 +102,7 @@ module.exports = async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
-      const content = await kv.get('content');
+      const content = await readContent();
       return res.status(200).json(content || DEFAULT_CONTENT);
     } catch {
       return res.status(200).json(DEFAULT_CONTENT);
@@ -109,10 +126,10 @@ module.exports = async function handler(req, res) {
       if (!content || typeof content !== 'object') {
         return res.status(400).json({ error: 'Invalid content body' });
       }
-      await kv.set('content', content);
+      await writeContent(content);
       return res.status(200).json({ ok: true });
     } catch (err) {
-      console.error('KV write error:', err);
+      console.error('Blob write error:', err);
       return res.status(500).json({ error: 'Failed to save content' });
     }
   }
