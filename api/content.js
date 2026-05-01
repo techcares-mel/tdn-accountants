@@ -1,4 +1,4 @@
-const { put, list } = require('@vercel/blob');
+const { put, list, download } = require('@vercel/blob');
 const jwt = require('jsonwebtoken');
 
 const BLOB_PATHNAME = 'content.json';
@@ -6,13 +6,13 @@ const BLOB_PATHNAME = 'content.json';
 async function readContent() {
   const { blobs } = await list({ prefix: BLOB_PATHNAME });
   if (!blobs.length) return null;
-  const r = await fetch(blobs[0].url);
+  const r = await download(blobs[0].url, { token: process.env.BLOB_READ_WRITE_TOKEN });
   return r.json();
 }
 
 async function writeContent(content) {
   await put(BLOB_PATHNAME, JSON.stringify(content), {
-    access: 'public',
+    access: 'private',
     addRandomSuffix: false,
     contentType: 'application/json',
   });
