@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — TDN Accountants &amp; Advisers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="assets/logo.png" alt="TDN Accountants &amp; Advisers" class="logo-img">
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#features">About</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="/blog" class="btn-ghost-nav">Blog</a>
+        <a href="/#contact" class="btn btn-primary">Book a Consultation</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-overlay" id="mobile-overlay">
+  <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+  <div class="mobile-menu">
+    <ul>
+      <li><a href="/#services" class="mobile-link">Services</a></li>
+      <li><a href="/#features" class="mobile-link">About</a></li>
+      <li><a href="/#pricing" class="mobile-link">Pricing</a></li>
+      <li><a href="/#contact" class="mobile-link">Contact</a></li>
+      <li><a href="/blog" class="mobile-link">Blog</a></li>
+    </ul>
+    <a href="/#contact" class="btn btn-primary btn-lg mobile-link">Book a Consultation</a>
+  </div>
+</div>
+
+<main class="post-main" id="post-main">
+  <div class="container">
+    <div class="post-loading">Loading…</div>
+  </div>
+</main>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="TDN Accountants &amp; Advisers" class="footer-logo">
+        <p class="footer-tagline" id="footer-tagline">Trusted accounting, tax and advisory services for Australian businesses since 2009.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TDN Accountants &amp; Advisers. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  const slug = window.location.pathname.split('/').filter(Boolean).pop();
+
+  if (!slug || slug === 'blog') {
+    window.location.href = '/blog';
+  } else {
+    fetch(`/api/posts/${slug}`)
+      .then(r => {
+        if (!r.ok) throw new Error('Not found');
+        return r.json();
+      })
+      .then(post => {
+        document.title = `${post.title} — TDN Accountants & Advisers`;
+
+        const main = document.getElementById('post-main');
+        main.innerHTML = `
+          <div class="container">
+            <a href="/blog" class="post-back">← Back to Blog</a>
+            ${post.featuredImage ? `<div class="post-featured-img" style="background-image:url('${post.featuredImage}')"></div>` : ''}
+            <article class="post-article">
+              <div class="post-article-meta">${post.date || ''}</div>
+              <h1 class="post-article-title">${post.title}</h1>
+              <div class="post-article-content">${post.content || ''}</div>
+            </article>
+            <div class="post-footer-cta">
+              <p>Need expert accounting advice? <a href="/#contact" class="link-primary">Book a free consultation →</a></p>
+            </div>
+          </div>
+        `;
+      })
+      .catch(() => {
+        document.getElementById('post-main').innerHTML = `
+          <div class="container" style="padding:4rem 0;text-align:center">
+            <p style="color:var(--color-muted)">Post not found. <a href="/blog" style="color:var(--color-primary)">Back to blog</a></p>
+          </div>
+        `;
+      });
+  }
+</script>
+</body>
+</html>

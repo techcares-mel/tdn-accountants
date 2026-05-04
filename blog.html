@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — TDN Accountants &amp; Advisers</title>
+  <meta name="description" content="Accounting tips, tax updates and business insights from TDN Accountants & Advisers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="assets/logo.png" alt="TDN Accountants &amp; Advisers" class="logo-img">
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#features">About</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="/blog" class="btn-ghost-nav">Blog</a>
+        <a href="/#contact" class="btn btn-primary">Book a Consultation</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-overlay" id="mobile-overlay">
+  <button class="mobile-close" id="mobile-close" aria-label="Close menu">✕</button>
+  <div class="mobile-menu">
+    <ul>
+      <li><a href="/#services" class="mobile-link">Services</a></li>
+      <li><a href="/#features" class="mobile-link">About</a></li>
+      <li><a href="/#pricing" class="mobile-link">Pricing</a></li>
+      <li><a href="/#contact" class="mobile-link">Contact</a></li>
+      <li><a href="/blog" class="mobile-link">Blog</a></li>
+    </ul>
+    <a href="/#contact" class="btn btn-primary btn-lg mobile-link">Book a Consultation</a>
+  </div>
+</div>
+
+<section class="blog-hero">
+  <div class="container">
+    <div class="section-label reveal">Insights &amp; Updates</div>
+    <h1 class="blog-hero-title reveal reveal-delay-1">Latest from <span class="gradient-text">TDN</span></h1>
+    <p class="blog-hero-sub reveal reveal-delay-2">Accounting tips, tax updates and business insights for Australian businesses.</p>
+  </div>
+</section>
+
+<section class="blog-listing">
+  <div class="container">
+    <div class="blog-grid" id="blog-grid">
+      <div class="blog-loading">Loading posts…</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="TDN Accountants &amp; Advisers" class="footer-logo">
+        <p class="footer-tagline" id="footer-tagline">Trusted accounting, tax and advisory services for Australian businesses since 2009.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TDN Accountants &amp; Advisers. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  fetch('/api/posts')
+    .then(r => r.json())
+    .then(posts => {
+      const grid = document.getElementById('blog-grid');
+      if (!posts.length) {
+        grid.innerHTML = '<p style="color:var(--color-muted);grid-column:1/-1">No posts published yet. Check back soon.</p>';
+        return;
+      }
+      grid.innerHTML = posts.map(p => `
+        <a href="/blog/${p.slug}" class="post-card reveal">
+          ${p.featuredImage ? `<div class="post-card-img" style="background-image:url('${p.featuredImage}')"></div>` : '<div class="post-card-img post-card-img--empty"></div>'}
+          <div class="post-card-body">
+            <div class="post-card-date">${p.date || ''}</div>
+            <h2 class="post-card-title">${p.title}</h2>
+            <p class="post-card-excerpt">${p.excerpt || ''}</p>
+            <span class="post-card-link">Read more →</span>
+          </div>
+        </a>
+      `).join('');
+      document.querySelectorAll('.post-card').forEach(el => revealObserver.observe(el));
+    })
+    .catch(() => {
+      document.getElementById('blog-grid').innerHTML = '<p style="color:var(--color-muted);grid-column:1/-1">Could not load posts.</p>';
+    });
+</script>
+</body>
+</html>
